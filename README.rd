@@ -1,4 +1,8 @@
-= Redmine Local Avatars
+= Chiliproject Local Avatars
+
+Based on Redmine Local Avatars
+
+== Original Text
 
 This plugin allows Redmine users to upload a picture to be used as
 an avatar (instead of depending on images from Gravatar).
