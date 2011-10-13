@@ -18,23 +18,27 @@
 
 require 'redmine'
 require 'dispatcher'
+require 'chiliproject_local_avatars/hooks'
+require 'chiliproject_local_avatars/local_avatars'
 
-Dispatcher.to_prepare(:redmine_local_avatars_prep) do
+Dispatcher.to_prepare(:chiliproject_local_avatars) do
 	require_dependency 'principal'
 	require_dependency 'user'
-  require_dependency 'redmine_local_avatars/hooks'
-  require_dependency 'redmine_local_avatars/application_helper_patch'
-  require_dependency 'redmine_local_avatars/users_helper_patch'
-  
-  [ApplicationHelper, UsersHelper, AccountController, MyController, UsersController, User].each do |base|
-    patch = "RedmineLocalAvatars::#{base.name}Patch".constantize
+  # require_dependency 'application_helper'
+  # require_dependency 'users_helper'
+	require_dependency 'my_controller'
+	require_dependency 'users_controller'
+
+  ApplicationHelper.send(:include, ChiliprojectLocalAvatars::ApplicationHelperPatch)  
+  [MyController, UsersController, User, UsersHelper].each do |base|
+    patch = "ChiliprojectLocalAvatars::#{base.name}Patch".constantize
     base.send(:include, patch) unless base.included_modules.include?(patch)
   end
 end
 
-Redmine::Plugin.register :redmine_local_avatars do
-  name 'Redmine Local Avatars plugin'
-  author 'Andrew Chaika and Luca Pireddu'
+Redmine::Plugin.register :chiliproject_local_avatars do
+  name 'Chiliproject Local Avatars plugin'
+  author 'Andrew Chaika, Luca Pireddu, Stephan Eckardt @ Finnlabs'
   description 'This plugin lets users upload avatars directly into Redmine'
 	version '0.1.1'
 end

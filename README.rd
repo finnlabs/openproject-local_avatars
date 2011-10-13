@@ -1,8 +1,10 @@
 = Chiliproject Local Avatars
 
-Based on Redmine Local Avatars
+This plugin is based on the following software:
+ * Redmine Local Avatars (0.1.1) by Luca Pireddu https://launchpad.net/redminelocalavatars
+ * Redmine Local Avatars (0.0.2) by A. Chaika https://github.com/Ubik/redmine_local_avatars 
 
-== Original Text
+== The original content of the README file for the Redmine Local Avatars plugin follows
 
 This plugin allows Redmine users to upload a picture to be used as
 an avatar (instead of depending on images from Gravatar).

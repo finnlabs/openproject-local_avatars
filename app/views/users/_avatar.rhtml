@@ -3,7 +3,7 @@
 <%= avatar(@user, :size => "128") %>
 </p>
 
-<% form_tag( { :action => 'save_avatar', :id => @user }, :multipart => true) do %>
+<% form_tag( { :action => 'update_avatar', :id => @user }, :multipart => true) do %>
 <p>
   <%= file_field_tag "avatar" %>
 </p>
