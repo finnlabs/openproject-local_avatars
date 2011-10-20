@@ -24,7 +24,7 @@ module ChiliprojectLocalAvatars
     			if user.is_a?(User)then
     				av = user.attachments.find_by_description 'avatar'
     				if av then
-    					image_url = url_for :only_path => false, :controller => 'users', :action => 'get_avatar', :id => user
+    					image_url = url_for :only_path => false, :controller => 'users', :action => 'dump_avatar', :id => user
     					options[:size] = "64" unless options[:size]
     					return "<img class=\"gravatar\" width=\"#{options[:size]}\" height=\"#{options[:size]}\" src=\"#{image_url}\" />"
     				end

@@ -26,15 +26,22 @@ module ChiliprojectLocalAvatars
     		include LocalAvatars
 				include InstanceMethods
 				
-				skip_before_filter :require_admin, :get_avatar
+				skip_before_filter :require_admin, :dump_avatar
 			end
 		end
 
     module InstanceMethods
-  		def get_avatar
+  		def dump_avatar
   		  return unless find_user
-        send_avatar(@user)
-  		end
+  			av = @user.attachments.find_by_description 'avatar'
+        unless av
+          render_404
+        else
+    		  send_file(av.diskfile, :filename => filename_for_content_disposition(av.filename),
+    			                       :type => av.content_type, 
+    			                       :disposition => (av.image? ? 'inline' : 'attachment'))
+        end
+      end
 
   		def update_avatar
   		  return unless find_user

@@ -35,7 +35,7 @@ module ChiliprojectLocalAvatars
   		def update_avatar
   			@user = User.current
         if save_or_delete_avatar
-  				redirect_to :action => 'account', :id => @user
+  				redirect_to :action => 'account'
 				else
   				redirect_to :action => 'avatar'
 				end				  
