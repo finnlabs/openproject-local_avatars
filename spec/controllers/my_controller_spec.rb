@@ -22,7 +22,7 @@ describe MyController do
         it { do_action; response.should be_redirect }
         it { do_action; should redirect_to my_account_path }
         specify { Attachment.should_receive(:attach_files); do_action }
-        it { do_action; flash[:notice].should include_text "uploaded" }
+        it { do_action; flash[:notice].should include_text "changed" }
       end
 
       describe "for a user with an avatar" do
@@ -33,7 +33,7 @@ describe MyController do
         it { do_action; should redirect_to my_account_path }
         it_should_behave_like "an action that deletes the user's avatar"
         specify { Attachment.should_receive(:attach_files); do_action }
-        it { do_action; flash[:notice].should include_text "uploaded" }
+        it { do_action; flash[:notice].should include_text "changed" }
       end
     end
 
@@ -47,7 +47,7 @@ describe MyController do
         it { do_action; should redirect_to my_account_path }
         specify { Attachment.should_not_receive(:attach_files); do_action }
         it { do_action; flash[:notice].should include_text "deleted" }
-        it { do_action; user.attachments.find_by_description('avatar').should be_blank}
+        it { do_action; user.local_avatar_attachment.should be_blank}
       end
 
       describe "for a user with an avatar" do
@@ -59,7 +59,7 @@ describe MyController do
         it_should_behave_like "an action that deletes the user's avatar"
         specify { Attachment.should_not_receive(:attach_files); do_action }
         it { do_action; flash[:notice].should include_text "deleted" }
-        it { do_action; user.attachments.find_by_description('avatar').should be_blank}
+        it { do_action; user.local_avatar_attachment.should be_blank}
       end
     end
   end

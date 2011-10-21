@@ -23,7 +23,7 @@ module ChiliprojectLocalAvatars
 		# In case of error, raises an exception and sets @possible_error
 
 		def save_or_delete_avatar
-			attachment = @user.attachments.find_by_description('avatar')
+			attachment = @user.local_avatar_attachment
 			attachment.destroy if attachment
 			if params[:delete]
         if @user.save

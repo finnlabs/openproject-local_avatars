@@ -35,7 +35,7 @@ module ChiliprojectLocalAvatars
     module InstanceMethods
   		def dump_avatar
   		  return unless find_user
-  			av = @user.attachments.find_by_description 'avatar'
+  			av = @user.local_avatar_attachment
         unless av
           render_404
         else

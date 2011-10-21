@@ -21,6 +21,12 @@ module ChiliprojectLocalAvatars
     def self.included(base) # :nodoc:    
       base.class_eval do      
 				acts_as_attachable
+				include InstanceMethods
+      end
+    end
+    module InstanceMethods
+      def local_avatar_attachment
+        self.attachments.find_by_description('avatar')
       end
     end
   end

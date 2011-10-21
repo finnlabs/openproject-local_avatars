@@ -1,7 +1,11 @@
 module ChiliprojectLocalAvatars::PluginSpecHelper
-  shared_examples_for "a controller with avatar features" do
+  shared_examples_for "there are users with and without avatars" do
     let(:user_without_avatar) { u = Factory.create :user; u.stub!(:id).and_return 123; u }
     let(:user_with_avatar) { u = Factory.create :user_with_avatar; u.stub!(:id).and_return 345;u }
+  end
+
+  shared_examples_for "a controller with avatar features" do
+    it_should_behave_like "there are users with and without avatars"
     before do
       User.stub!(:current).and_return Factory.create(:anonymous)
       File.stub!(:delete).and_return true
