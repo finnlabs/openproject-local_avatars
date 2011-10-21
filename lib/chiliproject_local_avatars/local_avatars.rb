@@ -23,17 +23,24 @@ module ChiliprojectLocalAvatars
 		# In case of error, raises an exception and sets @possible_error
 
 		def save_or_delete_avatar
-			attachment = @user.local_avatar_attachment
-			attachment.destroy if attachment
 			if params[:delete]
+  			attachment = @user.local_avatar_attachment
+  			attachment.destroy if attachment
         if @user.save
     			flash[:notice] = l(:avatar_deleted)
         else
           false
         end
       else
-  			Attachment.attach_files(@user, {'first' => {'file' => params[:avatar], 'description' => 'avatar'}})
-  			if @user.save
+  			old_attachment = @user.local_avatar_attachment
+        ok = begin
+               @user.local_avatar_attachment = params[:avatar]
+               old_attachment.destroy if old_attachment
+               true
+             rescue
+               false
+             end
+  			if ok and @user.save
     			flash[:notice] = l(:message_avatar_uploaded)
   			else
   			  flash[:error] = l(:error_saving_avatar)

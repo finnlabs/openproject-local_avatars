@@ -32,7 +32,7 @@ describe UsersController do
   describe "GET /users/:id/update_avatar" do
     before{ User.stub!(:current).and_return Factory.create(:admin) }
     describe "WHEN save submit" do
-      let(:submit_param) { {:commit => :button_save} }
+      let(:submit_param) { {:commit => :button_save, :avatar => avatar_file} }
       describe "for an invalid user" do
         let(:do_action) { post :update_avatar, submit_param.merge(:id => 0)}
         it_should_behave_like "an action with an invalid user"

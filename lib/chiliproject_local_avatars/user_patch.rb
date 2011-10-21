@@ -28,6 +28,15 @@ module ChiliprojectLocalAvatars
       def local_avatar_attachment
         self.attachments.find_by_description('avatar')
       end
+      
+      def local_avatar_attachment=(file)
+        image = Magick::Image.from_blob(file.read).first
+        image.crop_resized!(128, 128) if image.columns > 128 || image.rows > 128
+        file.rewind
+        file.write(image.to_blob)
+        file.rewind
+  			Attachment.attach_files(self, {'first' => {'file' => file, 'description' => 'avatar'}})
+      end
     end
   end
 end

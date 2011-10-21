@@ -2,6 +2,24 @@ module ChiliprojectLocalAvatars::PluginSpecHelper
   shared_examples_for "there are users with and without avatars" do
     let(:user_without_avatar) { u = Factory.create :user; u.stub!(:id).and_return 123; u }
     let(:user_with_avatar) { u = Factory.create :user_with_avatar; u.stub!(:id).and_return 345;u }
+    let(:avatar_file) do
+      image = Magick::Image.new(200,200)
+      image.format = "PNG"
+      file = Tempfile.new('avatar_image_spec')
+      file.stub!(:original_filename).and_return('foo.jpg')
+      file.stub!(:content_type).and_return('image/jpeg')
+      file.write image.to_blob
+      file.rewind
+      file
+    end
+    let(:bogus_avatar_file) do
+      file = Tempfile.new('avatar_bogus_spec')
+      file.stub!(:original_filename).and_return('foo.jpg')
+      file.stub!(:content_type).and_return('image/jpeg')
+      file.write "alert('Bogus')"
+      file.rewind
+      file
+    end
   end
 
   shared_examples_for "a controller with avatar features" do
@@ -20,7 +38,7 @@ module ChiliprojectLocalAvatars::PluginSpecHelper
   shared_examples_for "an action with stubbed User.find" do
     before do
       user.stub!(:save).and_return true if user
-      User.stub!(:find).and_return { |id| (id.to_s == "0") ? nil : user }
+      User.stub!(:find).and_return { |id, args| (id.to_s == "0") ? nil : user }
     end
   end
   

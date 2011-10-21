@@ -14,15 +14,24 @@ describe MyController do
   describe "GET /my/avatar/update" do
     before{ user.save; User.stub!(:current).and_return user }
     describe "WHEN save submit" do
-      let(:submit_param) { {:commit => :button_save} }
+      let(:submit_param) { {:commit => :button_save, :avatar => avatar_file} }
       describe "for a user without an avatar" do
         let(:user) { user_without_avatar }
         it_should_behave_like "an action with stubbed User.find"
         let(:do_action) { post :update_avatar, submit_param }
-        it { do_action; response.should be_redirect }
-        it { do_action; should redirect_to my_account_path }
-        specify { Attachment.should_receive(:attach_files); do_action }
-        it { do_action; flash[:notice].should include_text "changed" }
+        describe "WHEN save is successful" do
+          it { do_action; response.should be_redirect }
+          it { do_action; should redirect_to my_account_path }
+          specify { user.should_receive(:local_avatar_attachment=); do_action }
+          it { do_action; flash[:notice].should include_text "changed" }
+        end        
+        describe "WHEN save is not successful" do
+          before { user.stub!(:local_avatar_attachment=).and_raise(RuntimeError) }
+          it { do_action; response.should be_redirect }
+          it { do_action; should redirect_to my_avatar_path }
+          it { do_action; flash[:notice].should be_blank }
+          it { do_action; flash[:error].should include_text "could not be saved"}
+        end
       end
 
       describe "for a user with an avatar" do
