@@ -23,4 +23,7 @@ rescue LoadError => error
   raise error
 end
 
+require File.dirname(__FILE__) + "/plugin_spec_helper"
+include ChiliprojectLocalAvatars::PluginSpecHelper
+
 require 'redmine_factory_girl'
