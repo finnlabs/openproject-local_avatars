@@ -3,8 +3,8 @@
 
 de:
   label_avatar: "Avatar"
-  message_avatar_uploaded: "Avatar erfolgreich hochgeladen"
-  button_change_avatar: "Avatar anpassen"
-  are_you_sure_delete_avatar: "Wollen Sie den Avatar entfernen?"
-  avatar_deleted: "Avatar entfernt."
-  unable_to_delete_avatar: "Leider ist beim Löschen des Avatars ein Problem aufgetreten!"
+  message_avatar_uploaded: "Avatar erfolgreich geändert."
+  button_change_avatar: "Avatar ändern"
+  are_you_sure_delete_avatar: "Wollen Sie den Avatar wirklich löschen?"
+  avatar_deleted: "Avatar erfolgreich gelöscht."
+  unable_to_delete_avatar: "Avatar konnte nicht gelöscht werden."
