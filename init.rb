@@ -24,8 +24,6 @@ require 'chiliproject_local_avatars/local_avatars'
 Dispatcher.to_prepare(:chiliproject_local_avatars) do
 	require_dependency 'principal'
 	require_dependency 'user'
-  # require_dependency 'application_helper'
-  # require_dependency 'users_helper'
 	require_dependency 'my_controller'
 	require_dependency 'users_controller'
 
@@ -38,7 +36,7 @@ end
 
 Redmine::Plugin.register :chiliproject_local_avatars do
   name 'Chiliproject Local Avatars plugin'
-  author 'Andrew Chaika, Luca Pireddu, Stephan Eckardt @ Finnlabs'
-  description 'This plugin lets users upload avatars directly into Redmine'
-	version '0.1.1'
+  author 'Andrew Chaika, Luca Pireddu; Stephan Eckardt @ Finnlabs'
+  description 'This plugin lets users upload avatars directly into Chiliproject'
+	version '0.2.0'
 end
