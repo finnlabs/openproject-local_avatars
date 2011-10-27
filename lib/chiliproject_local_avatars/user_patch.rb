@@ -35,6 +35,7 @@ module ChiliprojectLocalAvatars
         file.rewind
         file.write(image.to_blob)
         file.rewind
+        local_avatar_attachment.destroy if local_avatar_attachment
   			Attachment.attach_files(self, {'first' => {'file' => file, 'description' => 'avatar'}})
       end
     end

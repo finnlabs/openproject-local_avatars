@@ -19,34 +19,25 @@
 module ChiliprojectLocalAvatars
 	module LocalAvatars
 	  private
-		# expects @user to be set.
-		# In case of error, raises an exception and sets @possible_error
 
-		def save_or_delete_avatar
-			if params[:delete]
-  			attachment = @user.local_avatar_attachment
-  			attachment.destroy if attachment
-        if @user.save
-    			flash[:notice] = l(:avatar_deleted)
-        else
+	  def save_or_delete_avatar
+      current_attachment = @user.local_avatar_attachment
+	    if params[:delete]
+  			if current_attachment and current_attachment.destroy
+  			  flash[:notice] = l(:avatar_deleted)
+  		  else
+          flash[:error] = l(:unable_to_delete_avatar)
           false
         end
       else
-  			old_attachment = @user.local_avatar_attachment
-        ok = begin
-               @user.local_avatar_attachment = params[:avatar]
-               old_attachment.destroy if old_attachment
-               true
-             rescue
-               false
-             end
-  			if ok and @user.save
+        begin
+          @user.local_avatar_attachment = params[:avatar]
     			flash[:notice] = l(:message_avatar_uploaded)
-  			else
+        rescue
   			  flash[:error] = l(:error_saving_avatar)
   			  false
-  		  end
+        end
       end
-		end
+    end
 	end
 end

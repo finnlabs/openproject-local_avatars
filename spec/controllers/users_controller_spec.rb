@@ -78,7 +78,7 @@ describe UsersController do
         it { do_action; response.should be_redirect }
         it { do_action; should redirect_to edit_user_path(123) }
         specify { Attachment.should_not_receive(:attach_files); do_action }
-        it { do_action; flash[:notice].should include_text "deleted" }
+        it { do_action; flash[:error].should include_text "could not be deleted" }
         it { do_action; user.local_avatar_attachment.should be_blank}
       end
 
@@ -90,7 +90,7 @@ describe UsersController do
         it { do_action; should redirect_to edit_user_path(345) }
         it_should_behave_like "an action that deletes the user's avatar"
         specify { Attachment.should_not_receive(:attach_files); do_action }
-        it { do_action; flash[:notice].should include_text "deleted" }
+        it { do_action; flash[:notice].should include_text "deleted successfully" }
         it { do_action; user.local_avatar_attachment.should be_blank}
       end
     end

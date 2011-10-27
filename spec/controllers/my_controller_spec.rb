@@ -53,9 +53,9 @@ describe MyController do
         it_should_behave_like "an action with stubbed User.find"
         let(:do_action) { post :update_avatar, submit_param }
         it { do_action; response.should be_redirect }
-        it { do_action; should redirect_to my_account_path }
+        it { do_action; should redirect_to my_avatar_path }
         specify { Attachment.should_not_receive(:attach_files); do_action }
-        it { do_action; flash[:notice].should include_text "deleted" }
+        it { do_action; flash[:error].should include_text "could not be deleted" }
         it { do_action; user.local_avatar_attachment.should be_blank}
       end
 
@@ -67,7 +67,7 @@ describe MyController do
         it { do_action; should redirect_to my_account_path }
         it_should_behave_like "an action that deletes the user's avatar"
         specify { Attachment.should_not_receive(:attach_files); do_action }
-        it { do_action; flash[:notice].should include_text "deleted" }
+        it { do_action; flash[:notice].should include_text "deleted successfully" }
         it { do_action; user.local_avatar_attachment.should be_blank}
       end
     end
