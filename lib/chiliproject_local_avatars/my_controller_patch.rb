@@ -23,6 +23,7 @@ module ChiliprojectLocalAvatars
 				helper :attachments
         verify :method => :get, :only => :avatar, :render => {:nothing => true, :status => :method_not_allowed }
         verify :method => :post, :only => :update_avatar, :render => {:nothing => true, :status => :method_not_allowed }
+        menu_item :change_avatar, :only => [:avatar]
 
 				include AttachmentsHelper
     		include LocalAvatars
