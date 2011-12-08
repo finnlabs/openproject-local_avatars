@@ -1,2 +1,6 @@
 <h2><%= l(:label_my_account) + ' &#187; ' + l(:button_change_avatar) %></h2>
 <%= render :partial => 'users/avatar' %>
+
+<% content_for :sidebar do %>
+<%= render :partial => 'my/sidebar' %>
+<% end %>
