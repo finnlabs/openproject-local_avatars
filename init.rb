@@ -37,7 +37,7 @@ Redmine::Plugin.register :chiliproject_local_avatars do
   name 'Chiliproject Local Avatars plugin'
   author 'Andrew Chaika, Luca Pireddu; Stephan Eckardt @ Finnlabs'
   description 'This plugin lets users upload avatars directly into Chiliproject'
-	version '0.2.0'
+	version ChiliprojectLocalAvatars::Version.full
 
   add_menu_item :my_menu, :change_avatar, {:controller => 'my', :action => 'avatar'}, :caption => :button_change_avatar
 end
