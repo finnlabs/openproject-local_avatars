@@ -21,7 +21,7 @@ describe MyController do
         let(:do_action) { post :update_avatar, submit_param }
         describe "WHEN save is successful" do
           it { do_action; response.should be_redirect }
-          it { do_action; should redirect_to my_account_path }
+          it { do_action; should redirect_to({ :controller => "my", :action => "account" }) }
           specify { user.should_receive(:local_avatar_attachment=); do_action }
           it { do_action; flash[:notice].should include_text "changed" }
         end
@@ -38,7 +38,7 @@ describe MyController do
         it_should_behave_like "an action with stubbed User.find"
         let(:do_action) { post :update_avatar, submit_param }
         it { do_action; response.should be_redirect }
-        it { do_action; should redirect_to my_account_path }
+        it { do_action; should redirect_to({ :controller => "my", :action => "account" }) }
         it_should_behave_like "an action that deletes the user's avatar"
         specify { Attachment.should_receive(:attach_files); do_action }
         it { do_action; flash[:notice].should include_text "changed" }
@@ -63,7 +63,7 @@ describe MyController do
         it_should_behave_like "an action with stubbed User.find"
         let(:do_action) { post :update_avatar, submit_param }
         it { do_action; response.should be_redirect }
-        it { do_action; should redirect_to my_account_path }
+        it { do_action; should redirect_to({ :controller => "my", :action => "account" }) }
         it_should_behave_like "an action that deletes the user's avatar"
         specify { Attachment.should_not_receive(:attach_files); do_action }
         it { do_action; flash[:notice].should include_text "deleted successfully" }

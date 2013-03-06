@@ -1,4 +1,73 @@
 module ChiliprojectLocalAvatars::PluginSpecHelper
+  shared_examples_for "an action requiring login" do
+    let(:current) { Factory.create(:user) }
+
+    before do
+      User.stub(:current).and_return(current)
+    end
+
+    describe "without beeing logged in" do
+      before do
+        User.stub(:current).and_return AnonymousUser.first
+
+        action
+      end
+
+      it { response.should redirect_to signin_path(:back_url => redirect_path) }
+    end
+
+    describe "with beeing logged in" do
+      before do
+        action
+      end
+
+      it { response.should be_success }
+    end
+  end
+
+
+  shared_examples_for "an action requiring admin" do
+    let(:current) { Factory.create(:admin) }
+
+    before do
+      User.stub(:current).and_return(current)
+    end
+
+    describe "without beeing logged in" do
+      before do
+        User.stub(:current).and_return AnonymousUser.first
+
+        action
+      end
+
+      it { response.should redirect_to signin_path(:back_url => redirect_path) }
+    end
+
+    describe "with beeing logged in as a normal user" do
+      before do
+        User.stub(:current).and_return Factory.create(:user)
+
+        action
+      end
+
+      it { response.response_code.should == 403 }
+    end
+
+    describe "with beeing logged in as admin" do
+      before do
+        action
+      end
+
+      it do
+        if respond_to? :successful_response
+          successful_response
+        else
+          response.should be_success
+        end
+      end
+    end
+  end
+
   shared_examples_for "there are users with and without avatars" do
     let(:user_without_avatar) {Factory.create :user}
     let(:uwoa_id) {user_without_avatar.id}
@@ -7,7 +76,7 @@ module ChiliprojectLocalAvatars::PluginSpecHelper
       u.attachments = [Factory.build(:avatar, :author => u)]
       u
     end
-    let(:uwa_id) {user_with_avatar.id}
+    let(:uwa_id) { user_with_avatar.id }
     let(:avatar_file) do
       image = Magick::Image.new(200,200)
       image.format = "PNG"

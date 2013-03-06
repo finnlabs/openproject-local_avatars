@@ -4,7 +4,15 @@ describe UsersController do
   it_should_behave_like "a controller with avatar features"
 
   describe "GET /users/:id/dump_avatar" do
-    before { User.stub!(:current).and_return AnonymousUser.first }
+    let(:user) { user_with_avatar }
+    let(:action) { get :dump_avatar, :id => user.id.to_s }
+    let(:redirect_path) { dump_user_avatar_url(:id => user.id) }
+    before do
+      @controller.stub!(:send_file).and_return true
+    end
+    it_should_behave_like "an action requiring login"
+
+    #before { User.stub!(:current).and_return AnonymousUser.first }
     describe "for an invalid user" do
       let(:do_action) { get :dump_avatar, :id => 0}
       it_should_behave_like "an action with an invalid user"
@@ -20,9 +28,6 @@ describe UsersController do
     describe "for a user with an avatar" do
       let(:user) { user_with_avatar }
       it_should_behave_like "an action with stubbed User.find"
-      before do
-        @controller.stub!(:send_file).and_return true
-      end
       let(:do_action) { get :dump_avatar, :id => uwa_id}
       it { do_action; response.should be_success }
       it { @controller.should_receive(:send_file).and_return true; do_action }
@@ -30,7 +35,16 @@ describe UsersController do
   end
 
   describe "GET /users/:id/update_avatar" do
-    before{ User.stub!(:current).and_return Factory.create(:admin) }
+    let(:user) { user_with_avatar }
+    let(:action) { post :update_avatar, :avatar => avatar_file, :id => user.id }
+    let(:redirect_path) { update_user_avatar_url(:id => user.id) }
+    let(:successful_response) do
+      response.should redirect_to({ :controller => 'users',
+                                    :action => 'edit',
+                                    :id => user.id } )
+    end
+    it_should_behave_like "an action requiring admin"
+
     describe "WHEN save submit" do
       let(:submit_param) { {:commit => :button_save, :avatar => avatar_file} }
       describe "for an invalid user" do
