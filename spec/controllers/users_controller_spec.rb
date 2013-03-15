@@ -10,9 +10,8 @@ describe UsersController do
     before do
       @controller.stub!(:send_file).and_return true
     end
-    it_should_behave_like "an action requiring login"
+    it_should_behave_like "an action checked for required login"
 
-    #before { User.stub!(:current).and_return AnonymousUser.first }
     describe "for an invalid user" do
       let(:do_action) { get :dump_avatar, :id => 0}
       it_should_behave_like "an action with an invalid user"

@@ -1,4 +1,32 @@
 module ChiliprojectLocalAvatars::PluginSpecHelper
+  shared_examples_for "an action checked for required login" do
+    before do
+      Setting.stub!(:login_required?).and_return(false)
+    end
+
+    describe "WITH no login required" do
+      before do
+        action
+      end
+
+      it "should be success" do
+        response.should be_success
+      end
+    end
+
+    describe "WITH login required" do
+      before do
+        Setting.stub!(:login_required?).and_return(true)
+
+        action
+      end
+
+      it "should redirect to the login page" do
+        response.should redirect_to signin_path(:back_url => redirect_path)
+      end
+    end
+  end
+
   shared_examples_for "an action requiring login" do
     let(:current) { Factory.create(:user) }
 
