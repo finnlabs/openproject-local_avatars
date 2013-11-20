@@ -40,9 +40,9 @@ module OpenProject::LocalAvatars
 
           image = Magick::Image.from_blob(file.read).first
           image.crop_resized!(128, 128) if image.columns > 128 || image.rows > 128
-          f.rewind
-          f.puts image.to_blob
-          f.rewind
+          file.rewind
+          file.puts image.to_blob
+          file.rewind
 
 
           local_avatar_attachment.destroy if local_avatar_attachment
