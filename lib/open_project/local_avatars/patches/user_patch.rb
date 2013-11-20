@@ -26,22 +26,25 @@ module OpenProject::LocalAvatars
     module UserPatch
       def self.included(base) # :nodoc:
         base.class_eval do
-        acts_as_attachable
+          acts_as_attachable
           include InstanceMethods
         end
       end
+
       module InstanceMethods
         def local_avatar_attachment
           self.attachments.find_by_description('avatar')
         end
 
         def local_avatar_attachment=(file)
+
           image = Magick::Image.from_blob(file.read).first
           image.crop_resized!(128, 128) if image.columns > 128 || image.rows > 128
 
-          file.rewind
-          file.write(image.to_blob)
-          file.rewind
+          file.tempfile.rewind
+          file.tempfile.puts(image.to_blob)
+          file.tempfile.rewind
+
           local_avatar_attachment.destroy if local_avatar_attachment
           Attachment.attach_files(self, {'first' => {'file' => file, 'description' => 'avatar'}})
         end

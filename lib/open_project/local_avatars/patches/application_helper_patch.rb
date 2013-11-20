@@ -22,12 +22,12 @@ module OpenProject::LocalAvatars
       def self.included(base) # :nodoc:
         base.class_eval do
 
-          def avatar_with_local(user, options = { })
+          def avatar_with_local(user, options = {})
             local_avatar(user, options) || avatar_without_local(user, options)
           end
 
           def local_avatar(user, options = {})
-            if user.is_a?(User)then
+            if user.is_a?(User) then
               av = user.local_avatar_attachment
               if av then
                 image_url = url_for :only_path => false, :controller => 'users', :action => 'dump_avatar', :id => user

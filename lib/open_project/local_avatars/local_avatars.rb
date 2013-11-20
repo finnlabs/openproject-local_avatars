@@ -17,27 +17,27 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 module OpenProject::LocalAvatars
-	module LocalAvatars
-	  private
+  module LocalAvatars
+    private
 
-	  def save_or_delete_avatar
+    def save_or_delete_avatar
       current_attachment = @user.local_avatar_attachment
-	    if params[:delete]
-  			if current_attachment and current_attachment.destroy
-  			  flash[:notice] = l(:avatar_deleted)
-  		  else
+      if params[:delete]
+        if current_attachment and current_attachment.destroy
+          flash[:notice] = l(:avatar_deleted)
+        else
           flash[:error] = l(:unable_to_delete_avatar)
           false
         end
       else
         begin
           @user.local_avatar_attachment = params[:avatar]
-    			flash[:notice] = l(:message_avatar_uploaded)
-        rescue
-  			  flash[:notice] = l(:notice_no_changes)
-  			  false
+          flash[:notice] = l(:message_avatar_uploaded)
+        rescue Exception
+          flash[:notice] = l(:notice_no_changes)
+          false
         end
       end
     end
-	end
+  end
 end
