@@ -1,13 +1,14 @@
 <div class="box">
 <p style="width: 128px; height: 128px; border: 1px silver solid;">
-<%= local_avatar(@user, :size => "128") %>
+<%= avatar(@user, :size => "128") %>
 </p>
 
-<% form_tag( { :action => 'update_avatar', :id => @user }, :multipart => true) do %>
+<%= form_tag( { :action => 'update_avatar', :id => @user }, :multipart => true) do %>
 <p>
   <%= file_field_tag "avatar" %>
 </p>
 <p>
+
   <%= submit_tag l(:button_save) %>
   <% if @user.local_avatar_attachment %>
   	<%= submit_tag l(:button_delete), :name => 'delete', :confirm => l(:are_you_sure_delete_avatar) %>

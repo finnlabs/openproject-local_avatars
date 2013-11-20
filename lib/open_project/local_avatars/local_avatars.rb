@@ -16,7 +16,7 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-module ChiliprojectLocalAvatars
+module OpenProject::LocalAvatars
 	module LocalAvatars
 	  private
 
@@ -33,7 +33,8 @@ module ChiliprojectLocalAvatars
         begin
           @user.local_avatar_attachment = params[:avatar]
     			flash[:notice] = l(:message_avatar_uploaded)
-        rescue
+        rescue Exception => e
+          Rails.logger.info "ERROR RAISED: #{e.backtrace}"
   			  flash[:notice] = l(:notice_no_changes)
   			  false
         end
