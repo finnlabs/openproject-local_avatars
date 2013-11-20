@@ -33,8 +33,7 @@ module OpenProject::LocalAvatars
         begin
           @user.local_avatar_attachment = params[:avatar]
     			flash[:notice] = l(:message_avatar_uploaded)
-        rescue Exception
-          
+        rescue
   			  flash[:notice] = l(:notice_no_changes)
   			  false
         end
@@ -42,4 +41,3 @@ module OpenProject::LocalAvatars
     end
 	end
 end
-
