@@ -30,10 +30,17 @@ module OpenProject::LocalAvatars
           false
         end
       else
+
+        avatar = params[:avatar];
+        unless avatar.original_filename =~ /\.(jpe?g|gif|png)\z/i
+          flash[:notice] = l(:wrong_file_format)
+          return
+        end
+
         begin
-          @user.local_avatar_attachment = params[:avatar]
+          @user.local_avatar_attachment = avatar
           flash[:notice] = l(:message_avatar_uploaded)
-        rescue Exception
+        rescue
           flash[:notice] = l(:notice_no_changes)
           false
         end

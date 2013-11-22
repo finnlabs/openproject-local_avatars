@@ -1,6 +1,6 @@
 <div class="box">
 <p style="width: 128px; height: 128px; border: 1px silver solid;">
-<%= local_avatar(@user, :size => "128") %>
+  <%= local_avatar(@user, :size => "128") %>
 </p>
 
 <%= form_tag( { :action => 'update_avatar', :id => @user }, :multipart => true) do %>
