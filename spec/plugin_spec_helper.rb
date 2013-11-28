@@ -1,4 +1,5 @@
-module ChiliprojectLocalAvatars::PluginSpecHelper
+module OpenProject::PluginSpecHelper
+
   shared_examples_for "an action checked for required login" do
     before do
       Setting.stub!(:login_required?).and_return(false)
@@ -28,8 +29,8 @@ module ChiliprojectLocalAvatars::PluginSpecHelper
   end
 
   shared_examples_for "an action requiring login" do
-    let(:current) { Factory.create(:user) }
-
+    let(:current) { FactoryGirl.create(:user) }
+                                                                                                                                         d
     before do
       User.stub(:current).and_return(current)
     end
@@ -55,7 +56,7 @@ module ChiliprojectLocalAvatars::PluginSpecHelper
 
 
   shared_examples_for "an action requiring admin" do
-    let(:current) { Factory.create(:admin) }
+    let(:current) { FactoryGirl.create(:admin) }
 
     before do
       User.stub(:current).and_return(current)
@@ -73,7 +74,7 @@ module ChiliprojectLocalAvatars::PluginSpecHelper
 
     describe "with beeing logged in as a normal user" do
       before do
-        User.stub(:current).and_return Factory.create(:user)
+        User.stub(:current).and_return FactoryGirl.create(:user)
 
         action
       end
@@ -97,11 +98,11 @@ module ChiliprojectLocalAvatars::PluginSpecHelper
   end
 
   shared_examples_for "there are users with and without avatars" do
-    let(:user_without_avatar) {Factory.create :user}
+    let(:user_without_avatar) {FactoryGirl.create :user}
     let(:uwoa_id) {user_without_avatar.id}
     let(:user_with_avatar) do
       u = Factory.create :user
-      u.attachments = [Factory.build(:avatar, :author => u)]
+      u.attachments = [FactoryGirl.build(:avatar, :author => u)]
       u
     end
     let(:uwa_id) { user_with_avatar.id }
@@ -128,7 +129,7 @@ module ChiliprojectLocalAvatars::PluginSpecHelper
   shared_examples_for "a controller with avatar features" do
     it_should_behave_like "there are users with and without avatars"
     before do
-      User.stub!(:current).and_return Factory.create(:anonymous)
+      User.stub!(:current).and_return FactoryGirl.create(:anonymous)
       File.stub!(:delete).and_return true
     end
   end
