@@ -1,15 +1,16 @@
 require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
+require File.expand_path(File.dirname(__FILE__) + '/../shared_examples')
 
 describe UsersController do
-  it_should_behave_like "a controller with avatar features"
+  include_examples "a controller with avatar features"
 
   describe "GET /users/:id/dump_avatar" do
     let(:user) { user_with_avatar }
     let(:action) { get :dump_avatar, :id => user.id.to_s }
     let(:redirect_path) { dump_user_avatar_url(:id => user.id) }
-    before do
-      @controller.stub!(:send_file).and_return true
-    end
+    # before do
+    #   @controller.stub!(:send_file).and_return true
+    # end
     it_should_behave_like "an action checked for required login"
 
     context "for an invalid user" do
@@ -29,7 +30,8 @@ describe UsersController do
       it_should_behave_like "an action with stubbed User.find"
       let(:do_action) { get :dump_avatar, :id => uwa_id}
       it { do_action; response.should be_success }
-      it { @controller.should_receive(:send_file).and_return true; do_action }
+      #again, we have to use the nasty trick to catch the default rails render
+      it { @controller.should_receive(:send_file).and_return true; @controller.should_receive(:render); do_action }
     end
   end
 

@@ -1,11 +1,12 @@
 require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
+require File.expand_path(File.dirname(__FILE__) + '/../shared_examples')
 
 describe User do
-  it_should_behave_like "there are users with and without avatars"
+  include_examples "there are users with and without avatars"
   let(:user) { FactoryGirl.build :user }
-  
+
   specify { user.attachments.should be_a_kind_of Array }
-  
+
   describe "#local_avatar_attachment" do
     subject { user.local_avatar_attachment }
 
@@ -19,7 +20,7 @@ describe User do
       it { should be_blank }
     end
   end
-  
+
   describe "#local_avatar_attachment=" do
     context "WHEN the uploaded file is not an image" do
       subject { lambda{ user.local_avatar_attachment = bogus_avatar_file } }
