@@ -25,7 +25,7 @@ module OpenProject::LocalAvatars
           helper :attachments
           verify :method => :get, :only => :dump_avatar, :render => {:nothing => true, :status => :method_not_allowed}
           verify :method => :post, :only => :update_avatar, :render => {:nothing => true, :status => :method_not_allowed}
-          skip_before_filter :require_admin, :only => :dump_avatar
+          skip_before_filter :require_admin, :only => [:dump_avatar, :update_avatar]
 
           include AttachmentsHelper
           include LocalAvatars
@@ -40,6 +40,7 @@ module OpenProject::LocalAvatars
           unless av
             render_404
           else
+
             send_file(av.diskfile, :filename => filename_for_content_disposition(av.filename),
                       :type => av.content_type,
                       :disposition => (av.image? ? 'inline' : 'attachment'))
@@ -48,6 +49,7 @@ module OpenProject::LocalAvatars
 
         def update_avatar
           return unless find_user
+
           save_or_delete_avatar
           redirect_to :action => 'edit', :id => @user
         end

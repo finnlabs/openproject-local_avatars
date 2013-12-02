@@ -28,7 +28,7 @@ module OpenProject::LocalAvatars
         base.class_eval do
           helper :attachments
           verify :method => :get, :only => :avatar, :render => {:nothing => true, :status => :method_not_allowed}
-          verify :method => :post, :only => :update_avatar, :render => {:nothing => true, :status => :method_not_allowed}
+          verify :method => :post, :only => :update_my_avatar, :render => {:nothing => true, :status => :method_not_allowed}
           menu_item :change_avatar, :only => [:avatar]
 
           include AttachmentsHelper
@@ -44,6 +44,11 @@ module OpenProject::LocalAvatars
 
         def update_avatar
           @user = User.current
+
+          unless @user
+            render_404
+          end
+
           if save_or_delete_avatar
             redirect_to :action => 'account'
           else
