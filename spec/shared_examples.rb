@@ -96,13 +96,11 @@ end
 #
 shared_examples_for "there are users with and without avatars" do
   let(:user_without_avatar) {FactoryGirl.create (:user)}
-  let(:uwoa_id) {user_without_avatar.id}
   let(:user_with_avatar) do
     u = FactoryGirl.create :user
-    u.attachments = [FactoryGirl.build(:avatar, :author => u)]
+    u.attachments = [FactoryGirl.build(:avatar_attachment, :author => u)]
     u
   end
-  let(:uwa_id) { user_with_avatar.id }
   let(:avatar_file) do
     image = Magick::Image.new(200,200)
     image.format = "PNG"
@@ -110,7 +108,7 @@ shared_examples_for "there are users with and without avatars" do
     file.write image.to_blob
     file.rewind
 
-    testfile = Rack::Test::UploadedFile.new(file.path, 'image/png')
+    testfile = Rack::Test::UploadedFile.new(file.path, 'avatar.png')
     testfile.stub(:tempfile).and_return(file)
     testfile
   end

@@ -25,7 +25,7 @@ module OpenProject::LocalAvatars
           helper :attachments
           verify :method => :get, :only => :dump_avatar, :render => {:nothing => true, :status => :method_not_allowed}
           verify :method => :post, :only => :update_avatar, :render => {:nothing => true, :status => :method_not_allowed}
-          skip_before_filter :require_admin, :only => [:dump_avatar, :update_avatar]
+          skip_before_filter :require_admin, :only => :dump_avatar
 
           include AttachmentsHelper
           include LocalAvatars
