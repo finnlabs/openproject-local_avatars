@@ -16,7 +16,6 @@ shared_examples_for "an action checked for required login" do
   describe "WITH login required" do
     before do
       Setting.stub!(:login_required?).and_return(true)
-
       action
     end
 
@@ -94,9 +93,9 @@ shared_examples_for "an action requiring admin" do
     end
   end
 end
-
+#
 shared_examples_for "there are users with and without avatars" do
-  let(:user_without_avatar) {FactoryGirl.create :user}
+  let(:user_without_avatar) {FactoryGirl.create (:user)}
   let(:uwoa_id) {user_without_avatar.id}
   let(:user_with_avatar) do
     u = FactoryGirl.create :user
@@ -110,7 +109,8 @@ shared_examples_for "there are users with and without avatars" do
     file = Tempfile.new(['avatar','.png'], :encoding => 'ascii-8bit')
     file.write image.to_blob
     file.rewind
-    testfile = Rack::Test::UploadedFile.new(file.path, 'avatar.png')
+
+    testfile = Rack::Test::UploadedFile.new(file.path, 'image/png')
     testfile.stub(:tempfile).and_return(file)
     testfile
   end
@@ -123,15 +123,17 @@ shared_examples_for "there are users with and without avatars" do
     testfile
   end
 end
-
+#
 shared_examples_for "a controller with avatar features" do
+
   include_examples "there are users with and without avatars"
   before do
     User.stub!(:current).and_return FactoryGirl.create(:anonymous)
     File.stub!(:delete).and_return true
   end
-end
 
+end
+#
 shared_examples_for "an action with an invalid user" do
   it { do_action; response.should_not be_success }
   it { do_action; response.code.should == "404"}
@@ -143,7 +145,7 @@ shared_examples_for "an action with stubbed User.find" do
     User.stub!(:find).and_return { |id, args| (id.to_s == "0") ? nil : user }
   end
 end
-
+#
 shared_examples_for "an action that deletes the user's avatar" do
   it { File.should_receive(:delete).and_return true; do_action }
 end

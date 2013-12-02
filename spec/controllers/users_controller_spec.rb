@@ -7,28 +7,28 @@ describe UsersController do
   describe "GET /users/:id/dump_avatar" do
     let(:user) { user_with_avatar }
     let(:action) { get :dump_avatar, :id => user.id.to_s }
-    let(:redirect_path) { dump_user_avatar_url(:id => user.id) }
-    # before do
+    let(:redirect_path) { dump_user_avatar_url(:id => user.id.to_s) }
+    #before do
     #   @controller.stub!(:send_file).and_return true
-    # end
+    #end
     it_should_behave_like "an action checked for required login"
 
     context "for an invalid user" do
       let(:do_action) { get :dump_avatar, :id => 0}
       it_should_behave_like "an action with an invalid user"
     end
-
+    #
     context "for a user without an avatar" do
       let(:user) { user_without_avatar }
       it_should_behave_like "an action with stubbed User.find"
       let(:do_action) { get :dump_avatar, :id => uwoa_id}
       it_should_behave_like "an action with an invalid user"
     end
-
+    #
     context "for a user with an avatar" do
       let(:user) { user_with_avatar }
       it_should_behave_like "an action with stubbed User.find"
-      let(:do_action) { get :dump_avatar, :id => uwa_id}
+      let(:do_action) { get :dump_avatar, :id => user.id.to_s}
       it { do_action; response.should be_success }
       #again, we have to use the nasty trick to catch the default rails render
       it { @controller.should_receive(:send_file).and_return true; @controller.should_receive(:render); do_action }
@@ -37,12 +37,12 @@ describe UsersController do
 
   describe "GET /users/:id/update_avatar" do
     let(:user) { user_with_avatar }
-    let(:action) { post :update_avatar, :avatar => avatar_file, :id => user.id }
-    let(:redirect_path) { update_user_avatar_url(:id => user.id) }
+    let(:action) { post :update_avatar, :avatar => avatar_file, :id => user.id.to_s }
+    let(:redirect_path) { update_user_avatar_url(:id => user.id.to_s) }
     let(:successful_response) do
       response.should redirect_to({ :controller => 'users',
                                     :action => 'edit',
-                                    :id => user.id } )
+                                    :id => user.id.to_s } )
     end
     it_should_behave_like "an action requiring admin"
 
@@ -50,21 +50,23 @@ describe UsersController do
       let(:submit_param) { {:commit => :button_save, :avatar => avatar_file} }
       context "for an invalid user" do
         let(:do_action) { post :update_avatar, submit_param.merge(:id => 0)}
-        it_should_behave_like "an action with an invalid user"
+        it { do_action;response.should be_redirect }
+        it { do_action; response.code.should == "302"}
+
         specify { Attachment.should_not_receive(:attach_files); do_action }
         it { do_action; flash[:notice].should be_blank }
       end
-
+  #
       context "for a user without an avatar" do
         let(:user) { user_without_avatar }
         it_should_behave_like "an action with stubbed User.find"
         let(:do_action) { post :update_avatar, submit_param.merge(:id => uwoa_id)}
         it { do_action; response.should be_redirect }
-        it { do_action; should redirect_to edit_user_path(uwoa_id) }
         specify { Attachment.should_receive(:attach_files); do_action }
+        it { do_action; should redirect_to edit_user_path(uwoa_id) }
         it { do_action; flash[:notice].should include "changed" }
       end
-
+  #
       context "for a user with an avatar" do
         let(:user) { user_with_avatar }
         it_should_behave_like "an action with stubbed User.find"
