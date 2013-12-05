@@ -38,7 +38,10 @@ module OpenProject::LocalAvatars
 
     initializer 'openproject_local_avatars.register_plugin' do
       Redmine::Plugin.register :openproject_local_avatars do
-        add_menu_item :my_menu, :change_avatar, {:controller => 'my', :action => 'avatar'}, :caption => :button_change_avatar
+        add_menu_item :my_menu, :change_avatar, 
+                      {:controller => 'my', :action => 'avatar'}, 
+                      :caption => :button_change_avatar,
+                      :html => { :class => 'icon2 icon-image1' }
       end
     end
 
