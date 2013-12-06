@@ -33,7 +33,7 @@ module OpenProject::LocalAvatars
 
         avatar = params[:avatar];
         unless avatar.original_filename =~ /\.(jpe?g|gif|png)\z/i
-          flash[:notice] = l(:wrong_file_format)
+          flash[:error] = l(:wrong_file_format)
           return
         end
 

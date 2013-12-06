@@ -1,3 +1,3 @@
 # Changelog
 
-* `#<ticket number>` Create plugin
+* `#3094` Initial Rails3 Migration

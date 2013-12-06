@@ -7,5 +7,5 @@ en:
   are_you_sure_delete_avatar: "Are you sure you want to delete your avatar?"
   avatar_deleted:  "Avatar deleted successfully."
   unable_to_delete_avatar:  "Avatar could not be deleted."
-  wrong_file_format: "Format allowed jpg, png, gif"
+  wrong_file_format: "Allowed formats are jpg, png, gif"
 

@@ -5,8 +5,6 @@ Feature: Set an new local avatar
     And there is 1 user with the following:
       | Login | john |
 
-
-  @javascript
   Scenario: Set an invalid local avatar
     Given I am already logged in as "john"
     When I am on the my account page
@@ -16,9 +14,8 @@ Feature: Set an new local avatar
     When I upload a "invalid_avatar.txt" image
     And I press "Save"
     Then I should be on the my avatar page
-    And  I should see "Format allowed jpg, png, gif"
+    And  I should see "Allowed formats are jpg, png, gif"
 
-  @javascript
   Scenario: Set a valid local avatar
     Given I am already logged in as "bob"
     When I am on the my account page

@@ -29,9 +29,6 @@ module OpenProject::LocalAvatars
 
     config.to_prepare do
       require_dependency 'project'
-      require_dependency 'principal'
-      require_dependency 'user'
-
     end
 
     patches [:User, :AvatarHelper, :MyController, :UsersController, :UsersHelper]

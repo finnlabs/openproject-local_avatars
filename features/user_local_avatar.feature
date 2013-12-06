@@ -3,7 +3,6 @@ Feature: Check adding avatar by admin in the user show page
     Given there is 1 user with:
       | Login | bob |
 
-  @javascript
   Scenario: Set an avatar for custom user
     Given I am already admin
     When I edit the user "bob"
