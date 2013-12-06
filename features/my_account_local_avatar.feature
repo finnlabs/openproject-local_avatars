@@ -1,4 +1,4 @@
-Feature: Edit Local Avatar
+Feature: Set an new local avatar
   Background:
     Given there is 1 user with:
       | Login | bob |
@@ -29,20 +29,3 @@ Feature: Edit Local Avatar
     And I press "Save"
     Then I should be on the my account page
     And  I should see "Avatar changed successfully."
-
-  @javascript
-  Scenario: Create a ticket with user that had set an avatar
-    Given there are the following project types:
-      | Name                  |
-      | Standard Project      |
-    And there is a project named "iMate" of type "Standard Project"
-    And I am already logged in as "john"
-    And I am working in project "iMate"
-    And there are the following work packages in project "iMate":
-      | subject | start_date | due_date   | author  |
-      | pe2     | 2013-01-01 | 2013-12-31 | bob     |
-    When I go to the page of the planning element "pe2" of the project called "iMate"
-    Then I should see ".gravatar" within ".profile-wrap"
-
-
-
