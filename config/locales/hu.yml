@@ -1,8 +1,0 @@
-hu:
-  label_avatar: "Avatar"
-  message_avatar_uploaded: "Avatar változtatása sikeresen megtörtént."
-  notice_no_changes: "Nem történt változtatás."
-  button_change_avatar:  "Avatar megváltoztatása"
-  are_you_sure_delete_avatar: "Biztosan törölni akarja az Avatart?"
-  avatar_deleted:  "Avatar törlése sikeresen megtörtént."
-  unable_to_delete_avatar:  "Az Avatar nem törölhetõ."

@@ -16,28 +16,35 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-module ChiliprojectLocalAvatars
-	module LocalAvatars
-	  private
+module OpenProject::LocalAvatars
+  module LocalAvatars
+    private
 
-	  def save_or_delete_avatar
+    def save_or_delete_avatar
       current_attachment = @user.local_avatar_attachment
-	    if params[:delete]
-  			if current_attachment and current_attachment.destroy
-  			  flash[:notice] = l(:avatar_deleted)
-  		  else
+      if params[:delete]
+        if current_attachment and current_attachment.destroy
+          flash[:notice] = l(:avatar_deleted)
+        else
           flash[:error] = l(:unable_to_delete_avatar)
           false
         end
       else
+
+        avatar = params[:avatar];
+        unless avatar.original_filename =~ /\.(jpe?g|gif|png)\z/i
+          flash[:error] = l(:wrong_file_format)
+          return
+        end
+
         begin
-          @user.local_avatar_attachment = params[:avatar]
-    			flash[:notice] = l(:message_avatar_uploaded)
+          @user.local_avatar_attachment = avatar
+          flash[:notice] = l(:message_avatar_uploaded)
         rescue
-  			  flash[:notice] = l(:notice_no_changes)
-  			  false
+          flash[:notice] = l(:notice_no_changes)
+          false
         end
       end
     end
-	end
+  end
 end

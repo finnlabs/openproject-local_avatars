@@ -1,6 +1,11 @@
-ActionController::Routing::Routes.draw do |map|
-  map.update_my_avatar 'my/avatar', :controller => 'my', :action => 'update_avatar', :conditions => { :method => :post }
-  map.my_avatar 'my/avatar', :controller => 'my', :action => 'avatar', :conditions => { :method => :get }
-  map.dump_user_avatar 'users/:id/avatar', :controller => 'users', :action => 'dump_avatar', :conditions => { :method => :get }
-  map.update_user_avatar 'users/:id/avatar', :controller => 'users', :action => 'update_avatar', :conditions => { :method => :post }
+OpenProject::Application.routes.draw do
+
+  post 'my/avatar', :controller => 'my', :action => 'update_avatar', :as => 'my_update_avatar'
+
+  get 'my/avatar', :controller => 'my', :action => 'avatar', :as => 'my_avatar'
+
+  get 'users/:id/avatar', :controller => 'users', :action => 'dump_avatar', :as => 'users_dump_avatar'
+
+  post 'users/:id/avatar', :controller => 'users', :action => 'update_avatar', :as => 'users_update_avatar'
+
 end

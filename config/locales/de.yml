@@ -9,3 +9,4 @@ de:
   are_you_sure_delete_avatar: "Wollen Sie den Avatar wirklich löschen?"
   avatar_deleted: "Avatar erfolgreich gelöscht."
   unable_to_delete_avatar: "Avatar konnte nicht gelöscht werden."
+  wrong_file_format: "Zulässige Dateiformate sind jpg, png, gif"
