@@ -10,3 +10,4 @@ de:
   avatar_deleted: "Avatar erfolgreich gelöscht."
   unable_to_delete_avatar: "Avatar konnte nicht gelöscht werden."
   wrong_file_format: "Zulässige Dateiformate sind jpg, png, gif"
+  empty_file_error: "Bitte wählen Sie ein Bild (jpg, png, gif) aus."
