@@ -8,4 +8,5 @@ en:
   avatar_deleted:  "Avatar deleted successfully."
   unable_to_delete_avatar:  "Avatar could not be deleted."
   wrong_file_format: "Allowed formats are jpg, png, gif"
+  empty_file_error: "Please upload a valid image (jpg, png, gif)"
 
