@@ -24,5 +24,4 @@ Feature: Set an new local avatar
     Then I should be on the my avatar page
     When I upload a "valid_avatar.png" image
     And I press "Save"
-    Then I should be on the my account page
-    And  I should see "Avatar changed successfully."
+    Then  I should see "Avatar changed successfully."
