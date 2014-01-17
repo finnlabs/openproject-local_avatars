@@ -25,23 +25,19 @@ module OpenProject::LocalAvatars
 
     register 'openproject-local_avatars',
              :author_url => 'http://finn.de',
-             :requires_openproject => '>= 3.0.0pre13'
+             :requires_openproject => '>= 3.0.0pre13' do
+
+              add_menu_item :my_menu, :change_avatar,
+                      {:controller => 'my', :action => 'avatar'},
+                      :caption => :button_change_avatar,
+                      :html => { :class => 'icon2 icon-image1' }
+             end
 
     config.to_prepare do
       require_dependency 'project'
     end
 
     patches [:User, :AvatarHelper, :MyController, :UsersController, :UsersHelper]
-
-    initializer 'openproject_local_avatars.register_plugin' do
-      Redmine::Plugin.register :openproject_local_avatars do
-        add_menu_item :my_menu, :change_avatar,
-                      {:controller => 'my', :action => 'avatar'},
-                      :caption => :button_change_avatar,
-                      :html => { :class => 'icon2 icon-image1' }
-      end
-    end
-
   end
 end
 
