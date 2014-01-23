@@ -16,7 +16,6 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-require_dependency 'open_project/local_avatars/local_avatars'
 module OpenProject::LocalAvatars
   class Engine < ::Rails::Engine
     engine_name :openproject_local_avatars
@@ -27,11 +26,11 @@ module OpenProject::LocalAvatars
              :author_url => 'http://finn.de',
              :requires_openproject => '>= 3.0.0pre13' do
 
-              add_menu_item :my_menu, :change_avatar,
-                      {:controller => 'my', :action => 'avatar'},
-                      :caption => :button_change_avatar,
-                      :html => { :class => 'icon2 icon-image1' }
-             end
+      add_menu_item :my_menu, :change_avatar,
+              {:controller => 'my', :action => 'avatar'},
+              :caption => :button_change_avatar,
+              :html => { :class => 'icon2 icon-image1' }
+     end
 
     config.to_prepare do
       require_dependency 'project'
