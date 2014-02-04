@@ -2,7 +2,7 @@
 en:
   label_avatar: "Avatar"
   message_avatar_uploaded: "Avatar changed successfully."
-  notice_no_changes: "No changes have been made."
+  error_image_upload: "Error saving the image."
   button_change_avatar:  "Change avatar"
   are_you_sure_delete_avatar: "Are you sure you want to delete your avatar?"
   avatar_deleted:  "Avatar deleted successfully."

@@ -4,7 +4,7 @@
 de:
   label_avatar: "Avatar"
   message_avatar_uploaded: "Avatar erfolgreich geändert."
-  notice_no_changes: "Es wurden keine Änderungen vorgenommen."
+  error_image_upload: "Fehler beim Abspeichern des Bildes."
   button_change_avatar: "Avatar ändern"
   are_you_sure_delete_avatar: "Wollen Sie den Avatar wirklich löschen?"
   avatar_deleted: "Avatar erfolgreich gelöscht."
