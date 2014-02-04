@@ -30,7 +30,7 @@ describe MyController do
           before { user.stub!(:local_avatar_attachment=).and_raise(RuntimeError) }
           it { do_action; response.should be_redirect }
           it { do_action; should redirect_to my_avatar_path }
-          it { do_action; flash[:notice].should include "No changes"}
+          it { do_action; flash[:error].should include "Error"}
         end
       end
 
