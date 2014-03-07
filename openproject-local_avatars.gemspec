@@ -18,4 +18,5 @@ Gem::Specification.new do |s|
   s.test_files = Dir["spec/**/*"]
 
   s.add_dependency "rails", "~> 3.2.14"
+  s.add_dependency "rmagick", "~> 2.13.2"
 end
