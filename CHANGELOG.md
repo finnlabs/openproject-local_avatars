@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.0.1
+
+* Version bump
+
 ## 0.0.1.pre2
 
 * things

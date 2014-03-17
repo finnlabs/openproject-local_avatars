@@ -8,11 +8,11 @@ Gem::Specification.new do |s|
   s.version     = OpenProject::LocalAvatars::VERSION
   s.authors     = "Finn GmbH"
   s.email       = "info@finn.de"
-  s.homepage    = "https://www.openproject.org/projects/local-avatars"  # TODO check this URL
+  s.homepage    = "https://www.openproject.org/projects/local-avatars"
   s.summary     = 'OpenProject Local Avatars'
   s.description = 'This plugin allows OpenProject users to upload a picture to be used as
                     an avatar (instead of depending on images from Gravatar).'
-  s.license     = 'GPLv3' # e.g. "MIT" or "GPLv3"
+  s.license     = 'GPLv3'
 
   s.files = Dir["{app,config,db,lib}/**/*"] + %w(CHANGELOG.md README.md)
   s.test_files = Dir["spec/**/*"]
