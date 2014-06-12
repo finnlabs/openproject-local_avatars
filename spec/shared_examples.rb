@@ -1,6 +1,6 @@
 shared_examples_for "an action checked for required login" do
   before do
-    Setting.stub!(:login_required?).and_return(false)
+    allow(Setting).to receive(:login_required?).and_return(false)
   end
 
   describe "WITH no login required" do
@@ -9,18 +9,18 @@ shared_examples_for "an action checked for required login" do
     end
 
     it "should be success" do
-      response.should be_success
+      expect(response).to be_success
     end
   end
 
   describe "WITH login required" do
     before do
-      Setting.stub!(:login_required?).and_return(true)
+      allow(Setting).to receive(:login_required?).and_return(true)
       action
     end
 
     it "should redirect to the login page" do
-      response.should redirect_to signin_path(:back_url => redirect_path)
+      expect(response).to redirect_to signin_path(:back_url => redirect_path)
     end
   end
 end
@@ -29,17 +29,17 @@ shared_examples_for "an action requiring login" do
   let(:current) { FactoryGirl.create(:user) }
 
   before do
-    User.stub(:current).and_return(current)
+    allow(User).to receive(:current).and_return(current)
   end
 
   describe "without beeing logged in" do
     before do
-      User.stub(:current).and_return AnonymousUser.first
+      allow(User).to receive(:current).and_return AnonymousUser.first
 
       action
     end
 
-    it { response.should redirect_to signin_path(:back_url => redirect_path) }
+    it { expect(response).to redirect_to signin_path(:back_url => redirect_path) }
   end
 
   describe "with beeing logged in" do
@@ -47,7 +47,7 @@ shared_examples_for "an action requiring login" do
       action
     end
 
-    it { response.should be_success }
+    it { expect(response).to be_success }
   end
 end
 
@@ -56,27 +56,27 @@ shared_examples_for "an action requiring admin" do
   let(:current) { FactoryGirl.create(:admin) }
 
   before do
-    User.stub(:current).and_return(current)
+    allow(User).to receive(:current).and_return(current)
   end
 
   describe "without beeing logged in" do
     before do
-      User.stub(:current).and_return AnonymousUser.first
+      allow(User).to receive(:current).and_return AnonymousUser.first
 
       action
     end
 
-    it { response.should redirect_to signin_path(:back_url => redirect_path) }
+    it { expect(response).to redirect_to signin_path(:back_url => redirect_path) }
   end
 
   describe "with beeing logged in as a normal user" do
     before do
-      User.stub(:current).and_return FactoryGirl.create(:user)
+      allow(User).to receive(:current).and_return FactoryGirl.create(:user)
 
       action
     end
 
-    it { response.response_code.should == 403 }
+    it { expect(response.response_code).to eq(403) }
   end
 
   describe "with beeing logged in as admin" do
@@ -88,7 +88,7 @@ shared_examples_for "an action requiring admin" do
       if respond_to? :successful_response
         successful_response
       else
-        response.should be_success
+        expect(response).to be_success
       end
     end
   end
@@ -109,7 +109,7 @@ shared_examples_for "there are users with and without avatars" do
     file.rewind
 
     testfile = Rack::Test::UploadedFile.new(file.path, 'avatar.png')
-    testfile.stub(:tempfile).and_return(file)
+    allow(testfile).to receive(:tempfile).and_return(file)
     testfile
   end
   let(:bogus_avatar_file) do
@@ -117,7 +117,7 @@ shared_examples_for "there are users with and without avatars" do
     file.write "alert('Bogus')"
     file.rewind
     testfile = Rack::Test::UploadedFile.new(file.path, 'bogus.png')
-    testfile.stub(:tempfile).and_return(file)
+    allow(testfile).to receive(:tempfile).and_return(file)
     testfile
   end
 end
@@ -126,24 +126,24 @@ shared_examples_for "a controller with avatar features" do
 
   include_examples "there are users with and without avatars"
   before do
-    User.stub!(:current).and_return FactoryGirl.create(:anonymous)
-    File.stub!(:delete).and_return true
+    allow(User).to receive(:current).and_return FactoryGirl.create(:anonymous)
+    allow(File).to receive(:delete).and_return true
   end
 
 end
 #
 shared_examples_for "an action with an invalid user" do
-  it { do_action; response.should_not be_success }
-  it { do_action; response.code.should == "404"}
+  it { do_action; expect(response).not_to be_success }
+  it { do_action; expect(response.code).to eq("404")}
 end
 
 shared_examples_for "an action with stubbed User.find" do
   before do
-    user.stub!(:save).and_return true if user
-    User.stub!(:find).and_return { |id, args| (id.to_s == "0") ? nil : user }
+    allow(user).to receive(:save).and_return true if user
+    allow(User).to receive(:find) { |id, args| (id.to_s == "0") ? nil : user }
   end
 end
 #
 shared_examples_for "an action that deletes the user's avatar" do
-  it { File.should_receive(:delete).and_return true; do_action }
+  it { expect(File).to receive(:delete).and_return true; do_action }
 end
