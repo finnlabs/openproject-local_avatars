@@ -24,7 +24,7 @@ module OpenProject::LocalAvatars
 
     register 'openproject-local_avatars',
              :author_url => 'http://finn.de',
-             :requires_openproject => '>= 3.0.0pre13' do
+             :requires_openproject => '>= 4.0.0' do
 
       add_menu_item :my_menu, :change_avatar,
               {:controller => 'my', :action => 'avatar'},
