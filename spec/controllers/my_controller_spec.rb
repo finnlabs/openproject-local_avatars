@@ -1,7 +1,7 @@
 require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 require File.expand_path(File.dirname(__FILE__) + '/../shared_examples')
 
-describe MyController do
+describe MyController, :type => :controller do
   include_examples "a controller with avatar features"
 
   describe "GET /my/avatar" do
