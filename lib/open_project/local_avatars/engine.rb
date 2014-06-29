@@ -39,5 +39,3 @@ module OpenProject::LocalAvatars
     patches [:User, :AvatarHelper, :MyController, :UsersController, :UsersHelper]
   end
 end
-
-
