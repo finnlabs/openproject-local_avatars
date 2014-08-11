@@ -26,19 +26,42 @@ module OpenProject::LocalAvatars
             local_avatar(user, options) || avatar_without_local(user, options)
           end
 
-          def local_avatar(user, options = {})
-            if user.is_a?(User) then
-              av = user.local_avatar_attachment
-              if av then
-                image_url = url_for :only_path => false, :controller => 'users', :action => 'dump_avatar', :id => user
-                options[:size] = "64" unless options[:size]
-                return "<img class=\"gravatar\" width=\"#{options[:size]}\" height=\"#{options[:size]}\" src=\"#{image_url}\" />".html_safe
-              end
-            end
-            nil
+          def avatar_url_with_local(user, options = {})
+            local_avatar_url(user) || avatar_url_without_local(user, options)
           end
 
           alias_method_chain :avatar, :local
+          alias_method_chain :avatar_url, :local
+
+          private
+
+          def local_avatar_url(user)
+            with_default_local_avatar_options(user, {}) do |_, _|
+              users_dump_avatar_url(user)
+            end
+          end
+
+          def local_avatar(user, options = {})
+            with_default_local_avatar_options(user, options) do |_, opts|
+              tag_options = merge_image_options(user, opts)
+
+              image_url = users_dump_avatar_url(user)
+
+              tag_options[:src] = image_url
+              tag_options[:alt] = 'Avatar'
+
+              tag 'img', tag_options, false, false
+            end
+          end
+
+          def with_default_local_avatar_options(user, options, &block)
+            return unless user.respond_to?(:local_avatar_attachment) &&
+                          user.local_avatar_attachment
+
+            with_default_avatar_options(user, options) do |email, opts|
+              block.call(email, opts)
+            end
+          end
         end
       end
     end

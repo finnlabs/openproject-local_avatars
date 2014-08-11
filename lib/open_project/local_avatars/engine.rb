@@ -36,7 +36,12 @@ module OpenProject::LocalAvatars
       require_dependency 'project'
     end
 
-    patches [:User, :AvatarHelper, :MyController, :UsersController, :UsersHelper]
+    patches [:User,
+             :AvatarHelper,
+             :MyController,
+             :UsersController,
+             :UsersHelper,
+             :'API::V3::Users::UserModel']
   end
 end
 
