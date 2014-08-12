@@ -44,5 +44,3 @@ module OpenProject::LocalAvatars
              :'API::V3::Users::UserModel']
   end
 end
-
-

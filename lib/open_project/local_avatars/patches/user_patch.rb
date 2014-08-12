@@ -46,4 +46,3 @@ module OpenProject::LocalAvatars
     end
   end
 end
-
