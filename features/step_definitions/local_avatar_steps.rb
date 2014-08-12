@@ -8,5 +8,5 @@ Given /^the user "(.*?)" has a local avatar/ do | login |
 end
 
 Then /^I should see a local avatar inside "(.*?)"/ do |container|
-  page.should have_xpath('//div[@class="' + container.to_s + '"]/img[@class="gravatar"]')
+  page.should have_selector(".#{container} img.avatar")
 end
