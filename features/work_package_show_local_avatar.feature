@@ -3,12 +3,10 @@ Feature: Check if local avatar was set
     Given there is 1 user with:
       | Login | bob  |
     And the user "bob" has a local avatar
+    And the "gravatar_enabled" setting is set to true
 
   Scenario: Create a ticket with user that had set an avatar
-    Given there are the following project types:
-      | Name                  |
-      | Standard Project      |
-    And there is a project named "iMate" of type "Standard Project"
+  Given there is a project named "iMate"
     And there are the following work packages in project "iMate":
       | subject | start_date | due_date   | author  |
       | pe2     | 2013-01-01 | 2013-12-31 | bob     |
