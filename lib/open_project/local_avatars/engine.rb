@@ -40,7 +40,6 @@ module OpenProject::LocalAvatars
              :AvatarHelper,
              :MyController,
              :UsersController,
-             :UsersHelper,
-             :'API::V3::Users::UserModel']
+             :UsersHelper]
   end
 end
