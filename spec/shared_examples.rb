@@ -20,7 +20,7 @@ shared_examples_for "an action checked for required login" do
     end
 
     it "should redirect to the login page" do
-      expect(response).to redirect_to signin_path(:back_url => redirect_path)
+      expect(response).to redirect_to signin_path(back_url: redirect_path)
     end
   end
 end
@@ -39,7 +39,7 @@ shared_examples_for "an action requiring login" do
       action
     end
 
-    it { expect(response).to redirect_to signin_path(:back_url => redirect_path) }
+    it { expect(response).to redirect_to signin_path(back_url: redirect_path) }
   end
 
   describe "with beeing logged in" do
@@ -66,7 +66,7 @@ shared_examples_for "an action requiring admin" do
       action
     end
 
-    it { expect(response).to redirect_to signin_path(:back_url => redirect_path) }
+    it { expect(response).to redirect_to signin_path(back_url: redirect_path) }
   end
 
   describe "with beeing logged in as a normal user" do
@@ -98,13 +98,13 @@ shared_examples_for "there are users with and without avatars" do
   let(:user_without_avatar) {FactoryGirl.create (:user)}
   let(:user_with_avatar) do
     u = FactoryGirl.create :user
-    u.attachments = [FactoryGirl.build(:avatar_attachment, :author => u)]
+    u.attachments = [FactoryGirl.build(:avatar_attachment, author: u)]
     u
   end
   let(:avatar_file) do
     image = Magick::Image.new(200,200)
     image.format = "PNG"
-    file = Tempfile.new(['avatar','.png'], :encoding => 'ascii-8bit')
+    file = Tempfile.new(['avatar','.png'], encoding: 'ascii-8bit')
     file.write image.to_blob
     file.rewind
 

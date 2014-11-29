@@ -22,9 +22,9 @@ module OpenProject::LocalAvatars
       def self.included(base) # :nodoc:
         base.class_eval do
           helper :attachments
-          verify :method => :get, :only => :avatar, :render => {:nothing => true, :status => :method_not_allowed}
-          verify :method => :post, :only => :my_update_avatar, :render => {:nothing => true, :status => :method_not_allowed}
-          menu_item :change_avatar, :only => [:avatar]
+          verify method: :get, only: :avatar, render: {nothing: true, status: :method_not_allowed}
+          verify method: :post, only: :my_update_avatar, render: {nothing: true, status: :method_not_allowed}
+          menu_item :change_avatar, only: [:avatar]
 
           include AttachmentsHelper
           include LocalAvatars
@@ -41,9 +41,9 @@ module OpenProject::LocalAvatars
           @user = User.current
 
           if save_or_delete_avatar
-            redirect_to :action => 'account'
+            redirect_to action: 'account'
           else
-            redirect_to :action => 'avatar'
+            redirect_to action: 'avatar'
           end
         end
       end

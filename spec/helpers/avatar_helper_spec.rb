@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe AvatarHelper, :type => :helper do
+describe AvatarHelper, type: :helper do
   let(:user) { FactoryGirl.build_stubbed(:user) }
   let(:avatar_stub) { FactoryGirl.build_stubbed(:avatar_attachment) }
 

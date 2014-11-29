@@ -3,7 +3,7 @@ FactoryGirl.define do
     description  "avatar"
     filename     "avatar.jpg"
     content_type "image/jpeg"
-    association :author, :factory => :user
+    association :author, factory: :user
 
     after(:build) do |avatar|
       path = OpenProject::Configuration['attachments_storage_path'] ||
