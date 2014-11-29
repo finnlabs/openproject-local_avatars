@@ -4,7 +4,7 @@ end
 
 Given /^the user "(.*?)" has a local avatar/ do | login |
   user = User.find_by_login(login)
-  user.attachments = [FactoryGirl.build(:avatar_attachment, :author => user)]
+  user.attachments = [FactoryGirl.build(:avatar_attachment, author: user)]
 end
 
 Then /^I should see a local avatar inside "(.*?)"/ do |container|

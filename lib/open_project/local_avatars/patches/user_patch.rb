@@ -30,7 +30,7 @@ module OpenProject::LocalAvatars
 
       module InstanceMethods
         def local_avatar_attachment
-          self.attachments.find_by_description('avatar')
+          attachments.find_by_description('avatar')
         end
 
         def local_avatar_attachment=(file)
@@ -40,7 +40,7 @@ module OpenProject::LocalAvatars
           file.tempfile.rewind
 
           local_avatar_attachment.destroy if local_avatar_attachment
-          Attachment.attach_files(self, {'first' => {'file' => file, 'description' => 'avatar'}})
+          Attachment.attach_files(self, 'first' => { 'file' => file, 'description' => 'avatar' })
         end
       end
     end
