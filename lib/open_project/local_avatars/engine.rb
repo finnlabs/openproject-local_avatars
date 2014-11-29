@@ -27,10 +27,10 @@ module OpenProject::LocalAvatars
              requires_openproject: '>= 4.0.0' do
 
       add_menu_item :my_menu, :change_avatar,
-              {controller: 'my', action: 'avatar'},
-              caption: :button_change_avatar,
-              html: { class: 'icon2 icon-image1' }
-     end
+                    { controller: 'my', action: 'avatar' },
+                    caption: :button_change_avatar,
+                    html: { class: 'icon2 icon-image1' }
+    end
 
     config.to_prepare do
       require_dependency 'project'

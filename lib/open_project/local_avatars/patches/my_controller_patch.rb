@@ -22,8 +22,8 @@ module OpenProject::LocalAvatars
       def self.included(base) # :nodoc:
         base.class_eval do
           helper :attachments
-          verify method: :get, only: :avatar, render: {nothing: true, status: :method_not_allowed}
-          verify method: :post, only: :my_update_avatar, render: {nothing: true, status: :method_not_allowed}
+          verify method: :get, only: :avatar, render: { nothing: true, status: :method_not_allowed }
+          verify method: :post, only: :my_update_avatar, render: { nothing: true, status: :method_not_allowed }
           menu_item :change_avatar, only: [:avatar]
 
           include AttachmentsHelper

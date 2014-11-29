@@ -31,7 +31,7 @@ module OpenProject::LocalAvatars
         end
       else
 
-        avatar = params[:avatar];
+        avatar = params[:avatar]
         if avatar.nil?
           flash[:error] = l(:empty_file_error)
           return
