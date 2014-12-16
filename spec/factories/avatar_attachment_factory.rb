@@ -1,15 +1,14 @@
 FactoryGirl.define do
   factory :avatar_attachment, class: Attachment do
+    author       factory: :user
+    container    factory: :work_package
     description  "avatar"
     filename     "avatar.jpg"
     content_type "image/jpeg"
-    association :author, :factory => :user
-
-    after(:build) do |avatar|
-      path = OpenProject::Configuration['attachments_storage_path'] ||
-          Rails.root.join('files').to_s
-      File.open(path + '/' + avatar.disk_filename, "w")
+    file do
+      OpenProject::Files.create_uploaded_file name: filename,
+                                              content_type: content_type,
+                                              binary: true
     end
   end
-
 end
