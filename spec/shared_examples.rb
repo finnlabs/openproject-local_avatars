@@ -145,5 +145,5 @@ shared_examples_for "an action with stubbed User.find" do
 end
 #
 shared_examples_for "an action that deletes the user's avatar" do
-  it { expect(File).to receive(:delete).and_return true; do_action }
+  it { expect_any_instance_of(Attachment).to receive(:destroy).and_call_original; do_action }
 end
