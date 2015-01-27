@@ -9,9 +9,11 @@
 </p>
 <p>
 
-  <%= submit_tag l(:button_save) %>
+  <%= submit_tag l(:button_save), class: 'button -highlight' %>
   <% if @user.local_avatar_attachment %>
-    <%= submit_tag l(:button_delete), :name => 'delete', :confirm => l(:are_you_sure_delete_avatar) %>
+    <%= submit_tag l(:button_delete), :name => 'delete',
+          :confirm => l(:are_you_sure_delete_avatar),
+          class: 'button' %>
   <% end%>
 </p>
 <% end %>
