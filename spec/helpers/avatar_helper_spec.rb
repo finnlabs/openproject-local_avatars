@@ -5,6 +5,7 @@ describe AvatarHelper, :type => :helper do
   let(:avatar_stub) { FactoryGirl.build_stubbed(:avatar_attachment) }
 
   before do
+    allow(GravatarImageTag.configuration).to receive(:secure).and_return(false)
     allow(user).to receive(:local_avatar_attachment).and_return avatar_stub
   end
 
