@@ -36,7 +36,7 @@ describe AvatarHelper, :type => :helper do
     image_tag expected_gravatar_url(user), tag_options
   end
 
-  describe :avatar do
+  describe '#avatar' do
     it "should return the image attached to the user" do
       with_settings gravatar_enabled: '1' do
         expect(helper.avatar(user)).to eq(expected_image_tag(user))
@@ -58,7 +58,7 @@ describe AvatarHelper, :type => :helper do
     end
   end
 
-  describe :avatar_url do
+  describe '#avatar_url' do
     it "should return the url to the image attached to the user" do
       with_settings gravatar_enabled: '1' do
         expect(helper.avatar_url(user)).to eq(expected_url(user))
