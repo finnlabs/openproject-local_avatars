@@ -5,7 +5,7 @@ describe User, :type => :model do
   include_examples "there are users with and without avatars"
   let(:user) { FactoryGirl.build :user }
 
-  specify { expect(user.attachments).to be_a_kind_of Array }
+  specify { expect(user.attachments).to all be_a_kind_of Attachment }
 
   describe "#local_avatar_attachment" do
     subject { user.local_avatar_attachment }
