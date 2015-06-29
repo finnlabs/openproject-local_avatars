@@ -9,7 +9,7 @@
 </p>
 <p>
 
-  <%= submit_tag l(:button_save), class: 'button -highlight' %>
+  <%= styled_button_tag l(:button_save), class: '-highlight -with-icon icon-yes' %>
   <% if @user.local_avatar_attachment %>
     <%= submit_tag l(:button_delete), :name => 'delete',
           :confirm => l(:are_you_sure_delete_avatar),
