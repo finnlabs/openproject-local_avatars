@@ -1,5 +1,5 @@
 module OpenProject
   module LocalAvatars
-    VERSION = "4.4.0-alpha"
+    VERSION = "5.0.0-alpha"
   end
 end
