@@ -14,7 +14,7 @@ Gem::Specification.new do |s|
                     an avatar (instead of depending on images from Gravatar).'
   s.license     = 'GPLv3'
 
-  s.files = Dir["{app,config,db,lib}/**/*"] + %w(CHANGELOG.md README.md)
+  s.files = Dir["{app,config,db,lib}/**/*"] + %w(README.md)
   s.test_files = Dir["spec/**/*"]
 
   s.add_dependency 'rails', '~> 4.0.13'
