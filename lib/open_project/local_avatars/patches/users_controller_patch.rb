@@ -28,7 +28,7 @@ module OpenProject::LocalAvatars
           skip_before_filter :require_admin, :only => :dump_avatar
 
           include AttachmentsHelper
-          include LocalAvatars
+          include ::OpenProject::LocalAvatars::LocalAvatars
           include InstanceMethods
         end
       end

@@ -27,7 +27,7 @@ module OpenProject::LocalAvatars
           menu_item :change_avatar, :only => [:avatar]
 
           include AttachmentsHelper
-          include LocalAvatars
+          include ::OpenProject::LocalAvatars::LocalAvatars
           include InstanceMethods
         end
       end
