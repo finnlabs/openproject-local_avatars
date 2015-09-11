@@ -51,7 +51,7 @@ module OpenProject::LocalAvatars
           return unless find_user
 
           save_or_delete_avatar
-          redirect_to :action => 'edit', :id => @user
+          redirect_to action: 'edit', id: @user, tab: 'avatar'
         end
       end
     end

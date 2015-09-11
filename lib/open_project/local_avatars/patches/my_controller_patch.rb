@@ -35,16 +35,14 @@ module OpenProject::LocalAvatars
       module InstanceMethods
         def avatar
           @user = User.current
+          write_settings(redirect_to: :avatar)
         end
 
         def update_avatar
           @user = User.current
 
-          if save_or_delete_avatar
-            redirect_to :action => 'account'
-          else
-            redirect_to :action => 'avatar'
-          end
+          save_or_delete_avatar
+          redirect_to action: 'avatar'
         end
       end
     end
