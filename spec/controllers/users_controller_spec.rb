@@ -37,9 +37,10 @@ describe UsersController, :type => :controller do
     let(:action) { post :update_avatar, :avatar => avatar_file, :id => user.id }
     let(:redirect_path) { users_update_avatar_url(:id => user.id) }
     let(:successful_response) do
-      expect(response).to redirect_to({ :controller => 'users',
-                                    :action => 'edit',
-                                    :id => user.id } )
+      expect(response).to redirect_to({ controller: 'users',
+                                        action: 'edit',
+                                        id: user.id,
+                                        tab: 'avatar'} )
     end
     it_should_behave_like "an action requiring admin"
 
@@ -63,7 +64,7 @@ describe UsersController, :type => :controller do
         it_should_behave_like "an action with stubbed User.find"
         let(:do_action) { post :update_avatar, submit_param.merge(:id => user.id)}
         it { do_action; expect(response).to be_redirect }
-        it { do_action; is_expected.to redirect_to edit_user_path(user.id) }
+        it { do_action; is_expected.to redirect_to tab_edit_user_path(user.id, tab: 'avatar') }
         specify { expect(Attachment).to receive(:attach_files); do_action }
         it { do_action; expect(flash[:notice]).to include "changed" }
       end
@@ -73,7 +74,7 @@ describe UsersController, :type => :controller do
         it_should_behave_like "an action with stubbed User.find"
         let(:do_action) { post :update_avatar, submit_param.merge(:id => user.id)}
         it { do_action; expect(response).to be_redirect }
-        it { do_action; is_expected.to redirect_to edit_user_path(user.id) }
+        it { do_action; is_expected.to redirect_to tab_edit_user_path(user.id, tab: 'avatar') }
         it_should_behave_like "an action that deletes the user's avatar"
         specify { expect(Attachment).to receive(:attach_files); do_action }
         it { do_action; expect(flash[:notice]).to include "changed" }
@@ -94,7 +95,7 @@ describe UsersController, :type => :controller do
         it_should_behave_like "an action with stubbed User.find"
         let(:do_action) { post :update_avatar, submit_param.merge(:id => user.id)}
         it { do_action; expect(response).to be_redirect }
-        it { do_action; is_expected.to redirect_to edit_user_path(user_without_avatar.id) }
+        it { do_action; is_expected.to redirect_to tab_edit_user_path(user.id, tab: 'avatar') }
         specify { expect(Attachment).not_to receive(:attach_files); do_action }
         it { do_action; expect(flash[:error]).to include "could not be deleted" }
         it { do_action; expect(user.local_avatar_attachment).to be_blank}
@@ -105,7 +106,7 @@ describe UsersController, :type => :controller do
         it_should_behave_like "an action with stubbed User.find"
         let(:do_action) { post :update_avatar, submit_param.merge(:id => user.id)}
         it { do_action; expect(response).to be_redirect }
-        it { do_action; is_expected.to redirect_to edit_user_path(user_with_avatar.id) }
+        it { do_action; is_expected.to redirect_to tab_edit_user_path(user.id, tab: 'avatar') }
         it_should_behave_like "an action that deletes the user's avatar"
         specify { expect(Attachment).not_to receive(:attach_files); do_action }
         it { do_action; expect(flash[:notice]).to include "deleted successfully" }
