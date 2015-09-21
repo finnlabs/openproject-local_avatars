@@ -3,7 +3,7 @@ Feature: Check adding avatar by admin in the user show page
     Given there is 1 user with:
       | Login | bob |
 
-  # FIXME This should be working without javascript
+  # FIXME This should be working without javascript, this might be related to imagemagick 2.15.4
   @javascript
   Scenario: Set an avatar for custom user
     Given I am already admin
