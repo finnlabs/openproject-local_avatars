@@ -1,18 +1,30 @@
-<p style="width: 128px; height: 128px; border: 1px silver solid;">
-  <%= local_avatar(@user, :size => "128") %>
-</p>
-
-<%= form_tag( { :action => 'update_avatar', :id => @user }, :multipart => true) do %>
-<p>
-  <%= file_field_tag "avatar" %>
-</p>
-<p>
-
-  <%= styled_button_tag l(:button_save), class: '-highlight -with-icon icon-yes' %>
-  <% if @user.local_avatar_attachment %>
-    <%= submit_tag l(:button_delete), :name => 'delete',
-          :confirm => l(:are_you_sure_delete_avatar),
-          class: 'button' %>
-  <% end%>
-</p>
-<% end %>
+    <%= form_tag( { action: 'update_avatar', id: @user }, multipart: true) do %>
+    <section class="form--section">
+      <div class="form--field">
+        <label class="form--label" for="username">
+          <%= l(:label_current_avatar) %>
+        </label>
+        <div class="form--field-container">
+          <div>
+            <%= local_avatar(@user) %>
+          </div>
+        </div>
+      </div>
+      <div class="form--field">
+        <label class="form--label" for="username">
+          <%= l(:label_choose_avatar) %>
+        </label>
+        <div class="form--field-container">
+          <%= file_field_tag "avatar" %>
+        </div>
+      </div>
+      <p>
+        <%= styled_button_tag l(:button_save), class: '-highlight -with-icon icon-yes' %>
+        <% if @user.local_avatar_attachment %>
+            <%= submit_tag l(:button_delete), name: 'delete',
+                           confirm: l(:are_you_sure_delete_avatar),
+                           class: 'button' %>
+        <% end %>
+      </p>
+    </section>
+    <% end %>
