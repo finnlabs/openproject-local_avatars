@@ -5,6 +5,7 @@ Feature: Check if local avatar was set
     And the user "bob" has a local avatar
     And the "gravatar_enabled" setting is set to true
 
+  @javascript
   Scenario: Create a ticket with user that had set an avatar
   Given there is a project named "iMate"
     And there are the following work packages in project "iMate":
@@ -13,4 +14,4 @@ Feature: Check if local avatar was set
 
     When I am already admin
     And  I go to the page of the planning element "pe2" of the project called "iMate"
-    Then I should see a local avatar inside "profile-wrap"
+    Then I should see a local avatar inside "detail-activity"
