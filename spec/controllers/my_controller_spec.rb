@@ -22,7 +22,7 @@ describe MyController, :type => :controller do
         let(:do_action) { post :update_avatar, submit_param }
         context "WHEN save is successful" do
           it { do_action; expect(response).to be_redirect }
-          it { do_action; is_expected.to redirect_to({ :controller => "my", :action => "account" }) }
+          it { do_action; is_expected.to redirect_to({ controller: 'my', action: 'avatar' }) }
           specify { expect(user).to receive(:local_avatar_attachment=); do_action }
           it { do_action; expect(flash[:notice]).to include "changed" }
         end
@@ -39,7 +39,7 @@ describe MyController, :type => :controller do
         it_should_behave_like "an action with stubbed User.find"
         let(:do_action) { post :update_avatar, submit_param }
         it { do_action; expect(response).to be_redirect }
-        it { do_action; is_expected.to redirect_to({ :controller => "my", :action => "account" }) }
+        it { do_action; is_expected.to redirect_to({ controller: 'my', action: 'avatar' }) }
         it_should_behave_like "an action that deletes the user's avatar"
         specify { expect(Attachment).to receive(:attach_files); do_action }
         it { do_action; expect(flash[:notice]).to include "changed" }
@@ -64,7 +64,7 @@ describe MyController, :type => :controller do
         it_should_behave_like "an action with stubbed User.find"
         let(:do_action) { post :update_avatar, submit_param }
         it { do_action; expect(response).to be_redirect }
-        it { do_action; is_expected.to redirect_to({ :controller => "my", :action => "account" }) }
+        it { do_action; is_expected.to redirect_to({ controller: 'my', action: 'avatar' }) }
         it_should_behave_like "an action that deletes the user's avatar"
         specify { expect(Attachment).not_to receive(:attach_files); do_action }
         it { do_action; expect(flash[:notice]).to include "deleted successfully" }
