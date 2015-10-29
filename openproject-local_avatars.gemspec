@@ -6,8 +6,8 @@ require 'open_project/local_avatars/version'
 Gem::Specification.new do |s|
   s.name        = "openproject-local_avatars"
   s.version     = OpenProject::LocalAvatars::VERSION
-  s.authors     = "Finn GmbH"
-  s.email       = "info@finn.de"
+  s.authors     = "OpenProject GmbH"
+  s.email       = "info@openproject.com"
   s.homepage    = "https://www.openproject.org/projects/local-avatars"
   s.summary     = 'OpenProject Local Avatars'
   s.description = 'This plugin allows OpenProject users to upload a picture to be used as
