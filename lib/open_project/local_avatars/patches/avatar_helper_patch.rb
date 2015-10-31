@@ -21,7 +21,6 @@ module OpenProject::LocalAvatars
     module AvatarHelperPatch
       def self.included(base) # :nodoc:
         base.class_eval do
-
           def avatar_with_local(user, options = {})
             local_avatar(user, options) || avatar_without_local(user, options)
           end
