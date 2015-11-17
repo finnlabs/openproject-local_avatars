@@ -23,7 +23,7 @@ module OpenProject::LocalAvatars
     def save_or_delete_avatar
       current_attachment = @user.local_avatar_attachment
       if params[:delete]
-        if current_attachment and current_attachment.destroy
+        if current_attachment && current_attachment.destroy
           flash[:notice] = l(:avatar_deleted)
         else
           flash[:error] = l(:unable_to_delete_avatar)
@@ -31,7 +31,7 @@ module OpenProject::LocalAvatars
         end
       else
 
-        avatar = params[:avatar];
+        avatar = params[:avatar]
         if avatar.nil?
           flash[:error] = l(:empty_file_error)
           return
