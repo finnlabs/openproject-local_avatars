@@ -8,7 +8,7 @@ Gem::Specification.new do |s|
   s.version     = OpenProject::LocalAvatars::VERSION
   s.authors     = "OpenProject GmbH"
   s.email       = "info@openproject.com"
-  s.homepage    = "https://www.openproject.org/projects/local-avatars"
+  s.homepage    = "https://community.openproject.org/projects/local-avatars"
   s.summary     = 'OpenProject Local Avatars'
   s.description = 'This plugin allows OpenProject users to upload a picture to be used as
                     an avatar (instead of depending on images from Gravatar).'
