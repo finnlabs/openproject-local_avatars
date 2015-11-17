@@ -1,38 +1,11 @@
 # OpenProject Local Avatars Plugin
 
-FIXME Add description and check issue tracker link below
+This plugin allows users to upload an avatar picture to their user profile. So users do not need to use external avatar providers.
 
 ## Issue Tracker
 
 https://www.openproject.org/projects/local-avatars/issues
 
-# Old Readme follows:
-
-# Chiliproject Local Avatars
-
-This plugin is based on the following software:
- * Redmine Local Avatars (0.1.1) by Luca Pireddu https://launchpad.net/redminelocalavatars
- * Redmine Local Avatars (0.0.2) by A. Chaika https://github.com/Ubik/redmine_local_avatars
-
-## The original content of the README file for the Redmine Local Avatars plugin follows
-
-This plugin allows Redmine users to upload a picture to be used as
-an avatar (instead of depending on images from Gravatar).
-
-Users can set their image through the /my/account page.  The administrator
-can also manage users' avatars through the /users section.
-
-## Installation
-
-Simply place the plugin in the vendors/plugins directory of your Redmine
-installation (or create a symlink).
-
-## Compatibility
-
-Tested on Redmine trunk r4388 (version 1.0.3).  Should be compatible with
-all Redmine versions 1.0.x.
-
-At the moment the plugin doesn't work when running in development mode.
 
 ## Authors
 
@@ -40,29 +13,18 @@ A. Chaika wrote the original version:
 * http://www.redmine.org/boards/3/topics/5365
 * https://github.com/Ubik/redmine_local_avatars
 
-Luca Pireddu <pireddu@gmail.com> at CRS4 (http://www.crs4.it),
-contributed updates and improvements.
+Luca Pireddu <pireddu@gmail.com> at CRS4 (http://www.crs4.it), contributed updates and improvements.
 
+## Installation
 
-## Warranty.  What warranty?
+TODO 
 
-This plugin was written for use in an intranet with simple requirements in
-mind.  In particular, not much attention has been payed to security issues
-and there hasn't been any thorough testing.  Use it at your own risk.
-Patches are welcome.
+# Copyright
 
+ * Copyright (C) 2010  Andrew Chaika, Luca Pireddu
+ * OpenProject GmbH
 
-## Implementation Notes
-
-Avatar images are treated as attachments to User objects
-with the description 'avatar'.  The AccountController is patched
-to provide the images, and the UsersController and MyController are
-patched to provide mechanisms to add/delete avatars.
-
-
-## License
-
-Copyright (C) 2010  Andrew Chaika, Luca Pireddu
+# License
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
