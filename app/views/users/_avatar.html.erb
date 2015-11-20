@@ -19,7 +19,7 @@
         </div>
       </div>
       <p>
-        <%= styled_button_tag l(:button_save), class: '-highlight -with-icon icon-yes' %>
+        <%= styled_button_tag l(:button_save), class: '-highlight -with-icon icon-checkmark' %>
         <% if @user.local_avatar_attachment %>
             <%= submit_tag l(:button_delete), name: 'delete',
                            confirm: l(:are_you_sure_delete_avatar),
